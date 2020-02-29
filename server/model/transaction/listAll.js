@@ -10,7 +10,14 @@ export default ({
 }) => new Promise(async (resolve, reject) => {
 	try {
 		const aggregattionQuery = [
-			
+			{
+				$group: {
+					_id: null,
+					debit: { $sum: '$debit' },
+					credit: { $sum: '$credit' }
+				}
+			},
+
 			{
 				$project: {
 					description: '$description',
@@ -18,13 +25,10 @@ export default ({
 					credit: '$credit',
 					debit: '$debit',
 					balance: {
-						$group: {
-							_id: null,
-							debit: { $sum: '$debit'},
-							credit: { $sum: '$credit'}
-						}
+						$subtract: ["debit","credit"]
+						
 					}
-									}
+				}
 			}
 		];
 
