@@ -1,8 +1,8 @@
 import {
-	UserControllers,
+	TransactionControllers,
 } from '../controllers';
 
-const prefix = '/api/users/';
+const prefix = '/api/transaction/';
 /**
  * @description
  * This is the route handler for the instructors
@@ -10,5 +10,6 @@ const prefix = '/api/users/';
  * @since 29 Feb
  */
 export default (app) => {
-	app.post(`${prefix}create`, UserControllers.create);
+	app.post(`${prefix}create`, TransactionControllers.create);
+	app.post(`${prefix}list`, TransactionControllers.listAll);
 	};
